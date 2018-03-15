@@ -1,0 +1,8 @@
+{
+  "name": "cwp-25",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "latest",
+    "shrink-ray": "^0.1.3"
+  }
+}
