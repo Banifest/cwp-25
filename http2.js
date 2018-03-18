@@ -65,17 +65,13 @@ function onRequest(req, res)
     console.log(filePath);
     if (filePath === '/index.html')
     {
-        push(res.stream, 'app.js');
-        push(res.stream, 'site.css');
+        push(res.stream, '/app.js');
+        push(res.stream, '/site.css');
 
-        const fileDescriptor = fs.openSync(`./public${filePath}`, 'r');
-        const stat = fs.fstatSync(fileDescriptor);
-        const contentType = mime.lookup(`./public${filePath}`);
-        res.stream.respondWithFD(fileDescriptor,  {
-            'content-length': stat.size,
-            'last-modified': stat.mtime.toUTCString(),
-            'content-type': contentType
-        });
+        res.stream.respondWithFile(
+            `./public${filePath}`,
+            { 'content-type': 'text/html' },
+            { statCheck, onError });
     }
     else
     {
